@@ -1,6 +1,7 @@
 package io.ahakim.board.exception;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
@@ -8,9 +9,11 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 @ControllerAdvice("io.ahakim.board.controller")
 public class GeneralControllerAdvice {
 
-    @ExceptionHandler({CustomException.class})
-    public void handleCustomException(CustomException e) {
-        log.error("Custom exception occurred: {}", e.getMessage(), e);
+    @ExceptionHandler({PostNotFoundException.class})
+    public String handleCustomException(PostNotFoundException e, Model model) {
+        model.addAttribute("msg", e.getMessage());
+        model.addAttribute("url", "/posts");
+        return "views/common/messageAlert";
     }
 
     @ExceptionHandler({Exception.class, RuntimeException.class})
