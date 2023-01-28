@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{/layout/default}">
+
+<th:block layout:fragment="style">
+    <link rel="stylesheet" th:href="@{/libs/toastui-editor/css/toastui-editor.min.css}"/>
+    <link rel="stylesheet" th:href="@{/css/post.css}"/>
+</th:block>
+
+<th:block layout:fragment="content">
+    <div class="content">
+        <h2 class="blind" th:text="#{page.post}"></h2>
+
+        <div class="sec_post">
+            <form id="detailForm" name="postForm" action="add.html" th:action method="post" th:object="${post}">
+                <input type="hidden" th:field="*{id}">
+                <!-- post-head -->
+                <div class="post-head">
+                    <div class="ui item">
+                        <p class="title" th:text="*{title}"></p>
+                    </div>
+                    <div class="ui item">
+                        <strong class="writer" th:text="*{writer}"></strong>
+                        <span> &middot; </span>
+                        <span class="date" th:text="*{createdAt}"></span>
+                        <span> &middot; </span>
+                        <span class="views" th:text="'조회수 '+ *{views}"></span>
+                    </div>
+                </div>
+                <!-- post-body -->
+                <div class="post-body">
+                    <div id="viewer" th:utext="*{content}"></div>
+                </div>
+                <!-- post-foot -->
+                <div class="post-foot">
+                    <div class="buttons">
+                        <div class="left">
+                            <button type="button" class="ui primary button large" th:text="#{button.add}" th:onclick="|postFormAction.addForm()|">글쓰기</button>
+                            <button type="button" class="ui  button large" th:text="#{button.reply}" th:onclick="|postFormAction.replyForm(${id})|">답글</button>
+                            <button type="button" class="ui button large" th:text="#{button.edit}" th:onclick="|postFormAction.editForm(${id})|">수정</button>
+                            <button type="button" class="ui button large" th:text="#{button.remove}" th:onclick="|postFormAction.removePost(${id})|">삭제</button>
+                        </div>
+                        <div class="right">
+                            <button type="button" class="ui button large" th:text="#{button.list}" th:onclick="|postFormAction.getList()|">목록</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</th:block>
+
+<th:block layout:fragment="script">
+    <script th:src="@{/libs/toastui-editor/js/toastui-editor-all.min.js}"></script>
+    <script th:src="@{/js/post.js}"></script>
+</th:block>
+</html>

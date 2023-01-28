@@ -1,0 +1,23 @@
+.toastui-editor-contents h1 {border-bottom-style: solid;border-bottom-width: 2px}
+#viewer {min-height: 300px;margin: 60px 0 120px}
+
+.post-head {margin-bottom: 12px}
+.post-head .title {width: 100%; margin: 0 0 24px;padding: 0;border: 0; font-size: 32px;font-weight: bold;word-break:break-all}
+.post-head .title:focus {outline: 0}
+.post-head .date, .post-head .views {color: #777}
+.post-body .table {table-layout: fixed}
+.post-body .table th, .post-body .table td, .post-body .t_title > a{overflow:hidden;text-overflow: ellipsis;white-space: nowrap}
+.post-body .table .t_id {width: 54px}
+.post-body .table .t_title {width: auto;text-align: left}
+.post-body .table .t_writer {width: 120px;text-align: left}
+.post-body .table .t_date {width: 110px}
+.post-body .table .t_views {width: 50px}
+
+
+.post-foot .buttons {overflow: hidden;margin: 8px 0 20px}
+.post-foot .buttons .left {float: left}
+.post-foot .buttons .right {float: right}
+.post-foot .buttons .button:last-child {margin-right: 0}
+
+.page-nav {display: flex;justify-content: center}
+.page-nav .item > .icon {margin-right: 0}
