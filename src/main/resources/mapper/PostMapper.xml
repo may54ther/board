@@ -2,6 +2,40 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="io.ahakim.board.mapper.PostMapper">
+    <!-- SELECT -->
+    <select id="count" resultType="int">
+        <![CDATA[
+        SELECT COUNT(*)
+        FROM posts
+        WHERE status = 'DEFAULT'
+        ]]>
+    </select>
+    <select id="existsById" resultType="boolean">
+        <![CDATA[
+        SELECT IF(COUNT(*) = 1, 1, 0)
+        FROM posts
+        WHERE status = 'DEFAULT'
+          AND id = #{id}
+        ]]>
+    </select>
+    <select id="selectAll" resultType="Post">
+        <![CDATA[
+        SELECT id,
+               writer,
+               title,
+               content,
+               views,
+               ref_id,
+               parent_id,
+               step,
+               level,
+               DATE_FORMAT(created_at, '%Y-%m-%d') AS `createdAt`
+        FROM posts
+        WHERE status = 'DEFAULT'
+        ORDER BY ref_id DESC, step
+        LIMIT #{offset}, #{size}
+        ]]>
+    </select>
     <select id="selectById" parameterType="long" resultType="Post">
         <![CDATA[
         SELECT id,
@@ -13,11 +47,73 @@
                parent_id,
                step,
                level,
-               DATE_FORMAT(created_at, '%Y-%m-%d %H:%i') AS `createdAt`,
-               status
+               DATE_FORMAT(created_at, '%Y-%m-%d %H:%i') AS `createdAt`
         FROM posts
         WHERE status = 'DEFAULT'
           AND id = #{id}
         ]]>
     </select>
+    <select id="selectNextStepByParentId" parameterType="long" resultType="int">
+       <![CDATA[
+        SELECT IFNULL(MAX(step), (SELECT step FROM posts WHERE id = #{param1})) + 1
+        FROM posts
+        WHERE parent_id = #{param1};
+        ]]>
+    </select>
+    <!-- INSERT -->
+    <insert id="insert" parameterType="Post">
+        <selectKey resultType="long" keyProperty="id" order="BEFORE">
+            SELECT MAX(id)+1
+            FROM posts
+        </selectKey>
+
+        <![CDATA[
+            INSERT INTO posts (id, writer, title, content, ref_id)
+            VALUES (#{id}, #{writer}, #{title}, #{content}, #{id})
+        ]]>
+    </insert>
+    <insert id="insertReply" parameterType="Post">
+        <selectKey resultType="long" keyProperty="id" order="BEFORE">
+            SELECT MAX(id)+1
+            FROM posts
+        </selectKey>
+
+        <![CDATA[
+            INSERT INTO posts (writer, title, content, ref_id, parent_id, step, level)
+            VALUES (#{writer}, #{title}, #{content}, #{refId}, #{parentId}, #{step}, #{level})
+        ]]>
+    </insert>
+    <!-- UPDATE -->
+    <update id="update" parameterType="Post">
+       <![CDATA[
+        UPDATE posts
+        SET title  = #{title},
+            content=#{content}
+        WHERE id = #{id}
+        ]]>
+    </update>
+    <update id="updateViews" parameterType="long">
+       <![CDATA[
+        UPDATE posts
+        SET views = views + 1
+        WHERE status = 'DEFAULT'
+          AND id = #{param1}
+        ]]>
+    </update>
+    <update id="updateSiblingSteps">
+       <![CDATA[
+        UPDATE posts
+        SET step = step + 1
+        WHERE ref_id = #{param1}
+          AND step >= #{param2}
+        ]]>
+    </update>
+    <!-- DELETE -->
+    <update id="delete" parameterType="long">
+       <![CDATA[
+        UPDATE posts
+        SET status ='DELETED'
+        WHERE id = #{param1}
+        ]]>
+    </update>
 </mapper>
