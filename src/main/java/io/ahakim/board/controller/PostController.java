@@ -1,5 +1,6 @@
 package io.ahakim.board.controller;
 
+import io.ahakim.board.service.PostService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,9 +13,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequiredArgsConstructor
 public class PostController {
 
+    private final PostService postService;
+
     @GetMapping
     public String posts() {
         return "views/post/list";
+    }
+
+    @GetMapping("/{id}")
+    public String post(@PathVariable Long id, Model model) {
+        model.addAttribute("post", postService.findById(id));
+        return "views/post/detail";
     }
 
     @GetMapping("/add")
