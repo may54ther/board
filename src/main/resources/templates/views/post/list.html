@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{/layout/default}">
+
+<th:block layout:fragment="style">
+    <link rel="stylesheet" th:href="@{/libs/toastui-editor/css/toastui-editor.min.css}"/>
+    <link rel="stylesheet" th:href="@{/css/post.css}"/>
+</th:block>
+
+<th:block layout:fragment="content">
+    <div class="content">
+        <h2 th:text="#{page.posts}"></h2>
+
+        <div class="sec_post">
+            <!-- post-body -->
+            <div class="post-body">
+                <table class="ui center aligned celled unstackable table">
+                    <thead>
+                    <tr>
+                        <th th:text="#{label.post.id}" class="t_id" scope="col">번호</th>
+                        <th th:text="#{label.post.title}" class="t_title" scope="col">제목</th>
+                        <th th:text="#{label.post.writer}" class="t_writer" scope="col">작성자</th>
+                        <th th:text="#{label.post.createdAt}" class="t_date" scope="col">날짜</th>
+                        <th th:text="#{label.post.views}" class="t_views" scope="col">조회</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td class="t_id">1</td>
+                        <td class="t_title">
+                            <a th:href="">
+                                <i class="ico reply"></i>
+                                <th:block>안녕하세요, 반가워요!</th:block>
+                            </a>
+                        </td>
+                        <td class="t_writer">작성자</td>
+                        <td class="t_date">2022-01-01</td>
+                        <td class="t_views">0</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- post-foot -->
+            <div class="post-foot">
+                <div class="buttons">
+                    <div class="right">
+                        <button type="button" class="ui primary button large" th:text="#{button.add}">글쓰기</button>
+                    </div>
+                </div>
+            </div>
+            <!-- pagination -->
+            <nav class="page-nav" aria-label="Page navigation" role="navigation">
+                <div class="ui pagination menu">
+                    <a class="item" th:href="">
+                        <i class="icon angle double left"></i>
+                        <span class="blind">처음</span>
+                    </a>
+                    <a class="item" th:href="">
+                        <i class="angle left icon"></i>
+                        <span class="blind">이전</span>
+                    </a>
+                    <!-- Number -->
+                    <th:block>
+                        <a class="item" th:href="">1</a>
+                        <a class="item" th:href="">2</a>
+                        <a class="item" th:href="">3</a>
+                        <a class="item" th:href="">4</a>
+                        <a class="item" th:href="">5</a>
+                    </th:block>
+                    <!-- Next, Last -->
+                    <a class="item" th:href="">
+                        <i class="angle right icon"></i>
+                        <span class="blind">다음</span>
+                    </a>
+                    <a class="item" th:href="">
+                        <i class="angle double right icon"></i>
+                        <span class="blind">마지막</span>
+                    </a>
+                </div>
+            </nav>
+        </div>
+    </div>
+</th:block>
+
+<th:block layout:fragment="script">
+    <script th:src="@{/libs/toastui-editor/js/toastui-editor-all.min.js}"></script>
+    <script th:src="@{/js/post.js}"></script>
+</th:block>
+</html>
