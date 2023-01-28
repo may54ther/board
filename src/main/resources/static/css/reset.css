@@ -1,0 +1,66 @@
+@charset "UTF-8";
+
+/* ---------------------------- CSS RESET ---------------------- */
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video, button {margin: 0;padding: 0;border: 0;font-family: 'Noto Sans KR', sans-serif;font-weight: normal;font-size: 100%;-webkit-text-size-adjust: none;-ms-text-size-adjust: none}
+
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {display: block}
+
+/*hr, legend, caption {overflow: hidden;position: absolute; width: 0; height: 0;font-size: 0; z-index: -1; opacity: 0}*/
+
+/*table {width: 100%; border-collapse: collapse; border-spacing: 0;border: 0 none}*/
+/*th, td {vertical-align: middle}*/
+/*ol, ul {list-style: none}*/
+
+/*!* FORM *!*/
+/*button, input, optgroup,*/
+/*option, select, textarea,*/
+/*input[type='password'],*/
+/*input[type='password']::-webkit-input-placeholder,*/
+/*input[type='password']::-moz-placeholder,*/
+/*input[type='password']:-ms-input-placeholder,*/
+/*input[type='password']:-moz-placeholder,*/
+/*input[type='password']::placeholder {font-family: 'Noto Sans KR', sans-serif}*/
+/*input, select, textarea, button, a {vertical-align: middle; outline: none}*/
+/*textarea {font-family: inherit;font-size: inherit;line-height: 1.5;resize: none}*/
+
+/*!*input[type='text']:focus, input[type='password']:focus, select:focus, textarea:focus {border-color: dodgerblue}*!*/
+/*input[type='file'] {border: 0}*/
+/*input[type='search'] {-moz-appearance: textfield; -webkit-appearance: textfield;appearance: textfield;-moz-box-sizing: content-box;-webkit-box-sizing: content-box;box-sizing: content-box}*/
+/*input[type='search']:-webkit-search-cancel-button, input[type='search']:-webkit-search-decoration {-webkit-appearance: none}*/
+
+/*!* IMG *!*/
+/*img {border: 0; vertical-align: top}*/
+/*img, fieldset {border: 0 none}*/
+
+/*!* ANCHOR, BUTTON *!*/
+/*a {color: #333;text-decoration: none}*/
+/*a:hover, a:active, a:focus, a:link, a:visited {text-decoration: none}*/
+/*!* a:focus{outline:#666 dotted 1px;outline-offset: -1px;} *!*/
+
+/*button {background: #fff;border: 0}*/
+/*button, label {vertical-align: middle;cursor: pointer}*/
+
+/* CUSTOM CLASS */
+.blind {overflow: hidden;position: absolute; width: 0; height: 0;font-size: 0; z-index: -1; opacity: 0}
+.clear {zoom: 1}
+.clear:after {clear: both;content: '';display: block}
+
+/* Skip Navigation */
+.skip-nav { position: relative }
+.skip-nav a { position: absolute; top: -30px; left: 0; width: 138px; border: 1px solid #a22025;background: #333;text-align: center}
+.skip-nav a:active,
+.skip-nav a:focus {top: 0;z-index: 1000; text-decoration: none}
+.skip-nav span {display: inline-block;padding: 2px 6px 0 0;color: #fff;letter-spacing: -1px;font-size: 13px;line-height: 26px}
