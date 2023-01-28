@@ -24,7 +24,11 @@ public class PostController {
     private final PostService postService;
 
     @GetMapping
-    public String posts(@ModelAttribute Pageable pageable, Model model) {
+    public String posts(@Valid Pageable pageable, BindingResult bindingResult, Model model) {
+        if (bindingResult.hasErrors()) {
+            return "redirect:/posts";
+        }
+        
         int count = postService.count();
         List<PostResponse> list = postService.findAll(pageable);
         Page<PostResponse> response = new Page<>(list, pageable, count);
