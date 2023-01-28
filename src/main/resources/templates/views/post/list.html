@@ -12,7 +12,7 @@
     <div class="content">
         <h2 th:text="#{page.posts}"></h2>
 
-        <div class="sec_post">
+        <div class="sec_post" th:object="${posts}">
             <!-- post-body -->
             <div class="post-body">
                 <table class="ui center aligned celled unstackable table">
@@ -26,17 +26,20 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <td class="t_id">1</td>
+                    <tr th:if="*{!hasContent()}">
+                        <td th:colspan="5">게시글이 없습니다.</td>
+                    </tr>
+                    <tr th:each="post : *{getList()}">
+                        <td class="t_id" th:text="${post.id}">1</td>
                         <td class="t_title">
-                            <a>
-                                <i class="ico reply"></i>
-                                <th:block>안녕하세요, 반가워요!</th:block>
+                            <a th:href="@{/posts/{id}(id=${post.id})}" th:styleappend="${post.level > 0} ? 'padding-left:'+${post.getLevel*10}+'px'">
+                                <i class="ico reply" th:if="${post.level > 0}"></i>
+                                <th:block th:text="${post.title} "></th:block>
                             </a>
                         </td>
-                        <td class="t_writer">작성자</td>
-                        <td class="t_date">2022-01-01</td>
-                        <td class="t_views">0</td>
+                        <td class="t_writer" th:text="${post.writer}">작성자</td>
+                        <td class="t_date" th:text="${post.createdAt}">2022-01-01</td>
+                        <td class="t_views" th:text="${post.views}">0</td>
                     </tr>
                     </tbody>
                 </table>
@@ -46,35 +49,31 @@
             <div class="post-foot">
                 <div class="buttons">
                     <div class="right">
-                        <button type="button" class="ui primary button large" th:text="#{button.add}">글쓰기</button>
+                        <button type="button" class="ui primary button large" th:text="#{button.add}" th:onclick="|postFormAction.addForm()|">글쓰기</button>
                     </div>
                 </div>
             </div>
             <!-- pagination -->
             <nav class="page-nav" aria-label="Page navigation" role="navigation">
                 <div class="ui pagination menu">
-                    <a class="item">
+                    <a class="item" th:if="*{!isFirstPage()}" th:href="@{/posts(page=1)}">
                         <i class="icon angle double left"></i>
                         <span class="blind">처음</span>
                     </a>
-                    <a class="item">
+                    <a class="item" th:if="*{hasPrevPage()}" th:href="@{/posts(page=*{getPageStart()-1})}">
                         <i class="angle left icon"></i>
                         <span class="blind">이전</span>
                     </a>
                     <!-- Number -->
-                    <th:block>
-                        <a class="item">1</a>
-                        <a class="item">2</a>
-                        <a class="item">3</a>
-                        <a class="item">4</a>
-                        <a class="item">5</a>
+                    <th:block th:each="pageNo : *{#numbers.sequence(getPageStart(), getPageEnd())}">
+                        <a class="item" th:th:classappend="${pageNo == posts.getPageNum() ? 'active':''}" th:href="@{/posts(page=${pageNo})}" th:text="${pageNo}"></a>
                     </th:block>
                     <!-- Next, Last -->
-                    <a class="item">
+                    <a class="item" th:if="*{hasNextPage()}" th:href="@{/posts(page=*{getPageEnd()+1})}">
                         <i class="angle right icon"></i>
                         <span class="blind">다음</span>
                     </a>
-                    <a class="item">
+                    <a class="item" th:if="*{!isLastPage()}" th:href="@{/posts(page=*{getTotalPage()})}">
                         <i class="angle double right icon"></i>
                         <span class="blind">마지막</span>
                     </a>
