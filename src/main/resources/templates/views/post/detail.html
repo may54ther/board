@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{/layout/default}">
+
+<th:block layout:fragment="style">
+    <link rel="stylesheet" th:href="@{/libs/toastui-editor/css/toastui-editor.min.css}"/>
+    <link rel="stylesheet" th:href="@{/css/post.css}"/>
+</th:block>
+
+<th:block layout:fragment="content">
+    <div class="content">
+        <h2 class="blind" th:text="#{page.post}"></h2>
+
+        <div class="sec_post">
+            <!-- post-head -->
+            <div class="post-head">
+                <div class="ui item">
+                    <p class="title"></p>
+                </div>
+                <div class="ui item">
+                    <strong class="writer">작성자</strong>
+                    <span> &middot; </span>
+                    <span class="date">작성일</span>
+                    <span> &middot; </span>
+                    <span class="views">조회수</span>
+                </div>
+            </div>
+            <!-- post-body -->
+            <div class="post-body">
+                <div id="viewer"></div>
+            </div>
+            <!-- post-foot -->
+            <div class="post-foot">
+                <div class="buttons">
+                    <div class="left">
+                        <button type="button" class="ui primary button large" th:text="#{button.add}">글쓰기</button>
+                        <button type="button" class="ui  button large" th:text="#{button.reply}">답글</button>
+                        <button type="button" class="ui button large" th:text="#{button.edit}">수정</button>
+                        <button type="button" class="ui button large" th:text="#{button.remove}">삭제</button>
+                    </div>
+                    <div class="right">
+                        <button type="button" class="ui button large" th:text="#{button.list}">목록</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</th:block>
+
+<th:block layout:fragment="script">
+    <script th:src="@{/libs/toastui-editor/js/toastui-editor-all.min.js}"></script>
+    <script th:src="@{/js/post.js}"></script>
+</th:block>
+</html>
