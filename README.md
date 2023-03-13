@@ -1,24 +1,51 @@
 # board-mvc
 
-## 사용 기술
+## 🛠️ 사용 기술
 
-- Spring Boot
 - Java
+- Spring Boot
 - Gradle
+- Mybatis
 - MariaDB
 - Thymeleaf
-- Mybatis
-- Logback
-- Lombok
+
+
+#### Tools
 - intellij IDEA
 
-#### `libs`
+#### gradle dependencies
+``` gradle
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-devtools'
+    implementation 'org.springframework.boot:spring-boot-starter-aop'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-jdbc'
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+    implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.2.2'
+    implementation 'nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect'
+    runtimeOnly 'org.mariadb.jdbc:mariadb-java-client'
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
+    testCompileOnly 'org.projectlombok:lombok'
+    testAnnotationProcessor 'org.projectlombok:lombok'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter-test:2.2.2'
+}
+```
+* Logback: `src/main/resources/logback-spring.xml` 
+* lombok: `@Getter`, `@Setter`, `@NoArgsConstructor`, `@RequiredArgsConstructor`, `@AllArgsConstructor` 등
+* thymeleaf, thymeleaf-layout
+
+#### Libs
 
 - [Semantic UI](https://semantic-ui.com/)
 - [Toast UI Editor](https://ui.toast.com/tui-editor)
 - [toastr](https://github.com/CodeSeven/toastr)
 
-## 구현 기능
+<br>
+
+## 👩🏻‍💻 기능
 
 #### 게시글 목록 (`/posts`)
 
