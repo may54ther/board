@@ -1,4 +1,4 @@
-# board-mvc
+# spring-thymeleaf-board
 
 ## 🛠️ 사용 기술
 
@@ -13,7 +13,7 @@
 #### Tools
 - intellij IDEA
 
-#### gradle dependencies
+#### Gradle dependencies
 ``` gradle
 dependencies {
     implementation 'org.springframework.boot:spring-boot-devtools'
@@ -47,6 +47,14 @@ dependencies {
 
 ## 👩🏻‍💻 기능
 
+### Pagination
+- 페이지를 탐색할 수 있는 `페이지네이션`을 포함
+  - 처음, 이전, 번호, 다음, 마지막
+  - 현재 페이지의 범위는 `1`이상, `전체 페이지`미만
+  - 만약, 범위 내의 값이 넘어오는 경우 첫 페이지로 리다이렉트
+
+### Post
+
 #### 게시글 목록 (`/posts`)
 
  ```
@@ -62,11 +70,8 @@ dependencies {
 |----|----------------------
 ```
 
-- 무한으로 확장이 가능한 계층형 게시판
-- 페이지를 탐색할 수 있는 `페이지네이션`을 포함
-    - 처음, 이전, 번호, 다음, 마지막
-    - 현재 페이지의 범위는 `1`이상, `전체 페이지`미만
-    - 만약, 범위 내의 값이 넘어오는 경우 첫 페이지로 리다이렉트
+- 제한 없이 확장이 가능한 계층형 게시판
+
 
 #### 게시글 조회 (`/posts/{id}`)
 
@@ -92,7 +97,11 @@ dependencies {
 - 게시글 삭제 유무를 `confirm`으로 확인
 - 실제 데이터를 삭제하지 않고 `status`값의 갱신을 통해 삭제 처리
 
-#### Logging
+### Log
 
 - `logback` 을 사용하여 일 단위로 로그를 파일로 저장
 - `aop`로 컨트롤러의 요청이나 서비스 단의 처리내용을 로그로 남김
+
+
+## Preview
+![Pagination Preview](./docs/preview-image.jpg)
